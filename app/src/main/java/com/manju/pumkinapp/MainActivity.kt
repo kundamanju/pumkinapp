@@ -4,44 +4,40 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.manju.pumkinapp.ui.theme.PumKinAppTheme
+import androidx.compose.ui.res.painterResource
+import com.manju.pumkinapp.ui.theme.LightBlue
+import com.manju.pumkinapp.ui.util.AppLoader
+import com.manju.pumkinapp.ui.util.BubbleTrailLoader
+import com.manju.pumkinapp.ui.util.CircularBubbleLoader
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PumKinAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Box(modifier = Modifier.fillMaxSize().background(color = LightBlue)) {
+                SplashScreen()
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PumKinAppTheme {
-        Greeting("Android")
+    @Composable
+    fun SplashScreen() {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            AppLoader(
+                text = "Loading",
+                showLogo = true,
+                logo = painterResource(R.drawable.outline_eco_24)
+            )
+        }
     }
 }
